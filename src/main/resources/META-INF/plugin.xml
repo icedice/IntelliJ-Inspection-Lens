@@ -36,4 +36,18 @@
   <projectListeners>
     <listener class="com.chylex.intellij.inspectionlens.LensFileEditorListener" topic="com.intellij.openapi.fileEditor.FileEditorManagerListener" />
   </projectListeners>
+
+  <extensions defaultExtensionNs="com.intellij">
+    <applicationService
+            serviceImplementation="com.chylex.intellij.inspectionlens.settings.AppSettingsState"/>
+  </extensions>
+
+  <extensions defaultExtensionNs="com.intellij">
+    <applicationConfigurable
+            parentId="appearance"
+            instance="com.chylex.intellij.inspectionlens.settings.AppSettingsConfigurable"
+            id="com.chylex.intellij.inspectionlens.settings.AppSettingsConfigurable"
+            displayName="Inspection Lens"/>
+  </extensions>
+
 </idea-plugin>

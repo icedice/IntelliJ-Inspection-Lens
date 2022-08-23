@@ -1,5 +1,6 @@
 package com.chylex.intellij.inspectionlens
 
+import com.chylex.intellij.inspectionlens.settings.AppSettingsState
 import com.intellij.codeInsight.daemon.impl.HighlightInfo
 import com.intellij.codeInsight.daemon.impl.HintRenderer
 import com.intellij.openapi.editor.Editor
@@ -8,7 +9,6 @@ import com.intellij.openapi.editor.markup.TextAttributes
 import java.awt.Font
 import java.awt.Graphics
 import java.awt.Rectangle
-import java.awt.Color
 
 /**
  * Renders the text of an inspection lens.
@@ -21,7 +21,7 @@ class LensRenderer(info: HighlightInfo) : HintRenderer(null) {
 	}
 	
 	fun setPropertiesFrom(info: HighlightInfo) {
-		text = "< \t" + getValidDescriptionText(info.description)
+		text = AppSettingsState.instance.prefix + " " + getValidDescriptionText(info.description)
 		severity = LensSeverity.from(info.severity)
 	}
 	
@@ -33,7 +33,7 @@ class LensRenderer(info: HighlightInfo) : HintRenderer(null) {
 	override fun getTextAttributes(editor: Editor): TextAttributes {
 		return ATTRIBUTES_SINGLETON.also {
 			it.backgroundColor = severity.getColor(editor)
-			it.foregroundColor = Color(200, 200, 200)
+			it.foregroundColor = AppSettingsState.instance.fgColr
 		}
 	}
 	
