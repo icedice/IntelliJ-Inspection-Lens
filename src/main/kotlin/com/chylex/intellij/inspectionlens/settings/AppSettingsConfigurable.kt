@@ -4,9 +4,6 @@ import com.intellij.openapi.options.Configurable
 import org.jetbrains.annotations.Nls
 import javax.swing.JComponent
 
-/**
- * Provides controller functionality for application settings.
- */
 class AppSettingsConfigurable : Configurable {
     private var mySettingsComponent: AppSettingsComponent? = null
 
@@ -28,20 +25,21 @@ class AppSettingsConfigurable : Configurable {
     override fun isModified(): Boolean {
         val settings = AppSettingsState.instance
         var modified = mySettingsComponent!!.userNameText != settings.prefix
-        modified = modified or (mySettingsComponent!!.foregroundColor.selectedColor != settings.fgColr)
+        modified = modified or (mySettingsComponent!!.foregroundColor.selectedColor != settings.colors["foreground"])
         return modified
     }
 
     override fun apply() {
         val settings = AppSettingsState.instance
         settings.prefix = mySettingsComponent!!.userNameText
-        settings.fgColr = mySettingsComponent!!.foregroundColor.selectedColor
+
+       settings.colors["foreground"] = mySettingsComponent!!.foregroundColor.selectedColor!!
     }
 
     override fun reset() {
         val settings = AppSettingsState.instance
         mySettingsComponent!!.userNameText = settings.prefix
-        mySettingsComponent!!.foregroundColor.setSelectedColor(settings.fgColr)
+        mySettingsComponent!!.foregroundColor.setSelectedColor(settings.colors["foreground"])
     }
 
     override fun disposeUIResources() {

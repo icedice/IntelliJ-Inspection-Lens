@@ -7,27 +7,25 @@ import com.intellij.util.ui.FormBuilder
 import javax.swing.JComponent
 import javax.swing.JPanel
 
-/**
- * Supports creating and managing a [JPanel] for the Settings Dialog.
- */
 class AppSettingsComponent {
     val panel: JPanel
-    private val myUserNameText = JBTextField()
+    private val prefixTextField = JBTextField()
     var foregroundColor = ColorPanel()
 
     init {
         panel = FormBuilder.createFormBuilder()
-            .addLabeledComponent(JBLabel("Message prefix: "), myUserNameText, 1, false)
-            .addComponentFillVertically(JPanel(), 0)
+            .addLabeledComponent(JBLabel("Message prefix: "), prefixTextField, 1, false)
+
             .addLabeledComponent(JBLabel("John: "), foregroundColor, 1, false)
+            .addComponentFillVertically(JPanel(), 0)
             .panel
     }
 
     val preferredFocusedComponent: JComponent
-        get() = myUserNameText
+        get() = prefixTextField
     var userNameText: String
-        get() = myUserNameText.text
+        get() = prefixTextField.text
         set(newText) {
-            myUserNameText.text = newText
+            prefixTextField.text = newText
         }
 }

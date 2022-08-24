@@ -13,12 +13,17 @@ import java.awt.Color
  * these persistent application settings are stored.
  */
 @State(
-    name = "com.chylex.intellij.inspectionlens.settings.AppSettingsState",
+    name = "InspectionlensSettings",
     storages = [Storage("InspectionLensPlugin.xml")]
 )
 class AppSettingsState : PersistentStateComponent<AppSettingsState?> {
+
+
+
+    val colors = mutableMapOf("foreground" to Color.red)
+
     var prefix = "< "
-    var fgColr = Color.white
+   // var fgColr: Color = Color.white
     override fun getState(): AppSettingsState? {
         return this
     }
